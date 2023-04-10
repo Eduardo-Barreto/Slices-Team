@@ -1,0 +1,5 @@
+build/
+.vscode/
+*.cfg
+*.json
+*.svd
