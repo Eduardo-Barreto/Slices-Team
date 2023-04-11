@@ -1,13 +1,13 @@
 class motor
 {
 private:
-    byte standByPin;
     byte IN1Pin;
     byte IN2Pin;
     byte pwmPin;
     byte pwmChannel;
 
 public:
+    byte standByPin;
     motor(byte standByPin, byte IN1Pin, byte IN2Pin, byte pwmPin, byte pwmChannel)
     {
         this->standByPin = standByPin;
@@ -30,7 +30,7 @@ public:
         digitalWrite(standByPin, HIGH);
     }
 
-    void run(char velocity)
+    void run(int8_t velocity)
     {
         if (velocity > 0)
         {
@@ -46,10 +46,8 @@ public:
         ledcWrite(pwmChannel, map(abs(velocity), 0, 100, 0, 255));
     }
 
-    void die()
+    void stop()
     {
-        digitalWrite(IN1Pin, LOW);
-        digitalWrite(IN2Pin, LOW);
         ledcWrite(pwmChannel, 0);
     }
 };
