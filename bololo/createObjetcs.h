@@ -1,5 +1,8 @@
 #include "motor.h"
 #include "sensor.h"
+#include "communication.h"
+
+communicationHandler com;
 
 motor leftMotor(
     4,  // standByPin
@@ -21,3 +24,6 @@ sensor turnLeftSensor(13);
 sensor leftSensor(34);
 sensor rightSensor(35);
 sensor turnRightSensor(27);
+
+#include "robot.h"
+robot robot;

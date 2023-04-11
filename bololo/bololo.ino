@@ -2,23 +2,16 @@
 
 void setup()
 {
+    com.write("Bololo iniciado!");
+    com.waitForCommand();
+    if (com.isCommand("calibrate"))
+    {
+        com.write("Calibrando...");
+    }
+
+    com.write("Iniciando...");
 }
 
 void loop()
 {
-    if (leftSensor.isBlack())
-    {
-        leftMotor.run(100);
-        rightMotor.run(0);
-    }
-    else if (rightSensor.isBlack())
-    {
-        rightMotor.run(100);
-        leftMotor.run(0);
-    }
-    else
-    {
-        leftMotor.run(30);
-        rightMotor.run(30);
-    }
 }
