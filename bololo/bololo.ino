@@ -1,15 +1,24 @@
-#include "createObjetcs.h"
+#include "routines.h"
 
 void setup()
 {
-    com.write("Bololo iniciado!");
-    com.waitForCommand();
-    if (com.isCommand("calibrate"))
+    com.init();
+    com.writeln("Bololo iniciado!");
+
+    while (!com.isCommand("start"))
     {
-        com.write("Calibrando...");
+        com.waitForCommand();
+        if (com.isCommand("calibrate"))
+        {
+            calibrateSensors();
+            saveCalibration();
+        }
     }
 
-    com.write("Iniciando...");
+    loadCalibration();
+    com.writeln("Iniciando...");
+    showCalibration();
+    robot.die();
 }
 
 void loop()

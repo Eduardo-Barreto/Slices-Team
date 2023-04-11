@@ -1,3 +1,9 @@
+struct sensorCalibration
+{
+    short min = 4095;
+    short max = 0;
+};
+
 class sensor
 {
 
@@ -5,10 +11,9 @@ private:
     byte sensorPin;
 
 public:
-    int raw;
-    int minRead = 0;
-    int maxRead = 1023;
-    byte reading;
+    short raw;
+    sensorCalibration calibration;
+    byte light;
     byte threshold = 50;
 
     sensor(byte sensorPin)
@@ -25,20 +30,20 @@ public:
     byte read()
     {
         this->raw = analogRead(sensorPin);
-        this->reading = map(raw, minRead, maxRead, 100, 0);
-        return this->reading;
+        this->light = map(raw, calibration.min, calibration.max, 100, 0);
+        return this->light;
     }
 
     void calibrate()
     {
         read();
-        this->maxRead = (this->raw > this->maxRead) ? this->raw : this->maxRead;
-        this->minRead = (this->raw < this->minRead) ? this->raw : this->minRead;
+        this->calibration.max = (this->raw > this->calibration.max) ? this->raw : this->calibration.max;
+        this->calibration.min = (this->raw < this->calibration.min) ? this->raw : this->calibration.min;
     }
 
     bool isBlack()
     {
         read();
-        return (this->reading < threshold);
+        return (this->light < threshold);
     }
 };

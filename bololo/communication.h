@@ -10,7 +10,7 @@ public:
 
     communicationHandler()
     {
-        this->init();
+        BluetoothSerial SerialBT;
     }
 
     void init()
@@ -48,6 +48,12 @@ public:
     }
 
     void write(String message)
+    {
+        Serial.print(message);
+        SerialBT.print(message);
+    }
+
+    void writeln(String message)
     {
         Serial.println(message);
         SerialBT.println(message);
