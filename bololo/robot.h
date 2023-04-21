@@ -1,7 +1,9 @@
-class robot
+class robotBase
 {
 public:
-    void move(int8_t leftVelocity, int8_t rightVelocity)
+    bool isOn = false;
+
+    void move(short leftVelocity, short rightVelocity)
     {
         leftMotor.run(leftVelocity);
         rightMotor.run(rightVelocity);
@@ -13,10 +15,22 @@ public:
         rightMotor.stop();
     }
 
-    void die()
+    void off()
     {
         stop();
         digitalWrite(leftMotor.standByPin, LOW);
+        isOn = false;
+    }
+
+    void on()
+    {
+        digitalWrite(leftMotor.standByPin, HIGH);
+        isOn = true;
+    }
+
+    void die()
+    {
+        off();
         while (true)
             ;
     }

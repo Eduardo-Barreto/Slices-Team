@@ -13,8 +13,8 @@ private:
 public:
     short raw;
     sensorCalibration calibration;
-    byte light;
-    byte threshold = 50;
+    char light;
+    byte threshold = 20;
 
     sensor(byte sensorPin)
     {
@@ -45,5 +45,11 @@ public:
     {
         read();
         return (this->light < threshold);
+    }
+
+    bool isWhite()
+    {
+        read();
+        return (this->light > threshold);
     }
 };

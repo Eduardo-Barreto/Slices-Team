@@ -33,7 +33,7 @@ public:
         {
             lastCommand = Serial.readStringUntil('\n');
         }
-        lastCommand.toLowerCase();
+        lastCommand.toUpperCase();
         return lastCommand;
     }
 
@@ -53,10 +53,55 @@ public:
         SerialBT.print(message);
     }
 
+    void write(int message)
+    {
+        write(String(message));
+    }
+
+    void write(unsigned long message)
+    {
+        write(String(message));
+    }
+
+    void write(float message, int precision = 4)
+    {
+        write(String(message, precision));
+    }
+
+    void write(double message, int precision = 4)
+    {
+        write(String(message, precision));
+    }
+
+    void writeln()
+    {
+        write("\n");
+    }
+
     void writeln(String message)
     {
-        Serial.println(message);
-        SerialBT.println(message);
+        write(message);
+        write("\n");
+    }
+
+    void writeln(int message)
+    {
+        writeln(String(message));
+    }
+
+    void writeln(unsigned long message)
+    {
+        writeln(String(message));
+    }
+
+    void writeln(float message, int precision = 4)
+    {
+        writeln(String(message, precision));
+    }
+
+    void writeln(double message, int precision = 4)
+    {
+        writeln(String(message, precision));
     }
 
     bool isCommand(String command)

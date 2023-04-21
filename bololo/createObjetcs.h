@@ -23,7 +23,7 @@ sensor rightSensor(35);
 sensor turnRightSensor(27);
 
 #include "robot.h"
-robot robot;
+robotBase robot;
 
 #include "communication.h"
 communicationHandler com;
